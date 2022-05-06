@@ -16,5 +16,6 @@ namespace TaskBE.Entities
         public string TypeDescAr { get; set; }
         [StringLength(150)]
         public string TypeDescEn { get; set; }
+        public List<DemographicTypeDTLTbl> demographicTypeDTLTbls { get; set; }
     }
 }

@@ -38,6 +38,24 @@ namespace TaskBE.EntityFrameWork.Repository
             return demographicType;
         }
 
+        public Task<CreateUpdateDto> AddUpdatelist(CreateUpdateDto createUpdateDto)
+        {
+            if (createUpdateDto.AddList.Count > 0)
+            {
+                _db.DemographicTypeTbls.AddRange(createUpdateDto.AddList);
+                var status=_db.SaveChanges();
+                if (status < 1) { throw new Exception("error is occured in create operation"); }
+            }
+            if (createUpdateDto.UpdateList.Count > 0)
+            {
+                _db.DemographicTypeTbls.UpdateRange(createUpdateDto.UpdateList);
+                var status = _db.SaveChanges();
+                if (status < 1) { throw new Exception("error is occured in update operation"); }
+
+            }
+            return Task.FromResult(createUpdateDto);
+        }
+
         public async Task<DemographicTypeTbl> DeleteAsync(int id)
         {
             if (id == 0)
@@ -84,7 +102,7 @@ namespace TaskBE.EntityFrameWork.Repository
 
         public async Task<IEnumerable<DemographicTypeTbl>> GetAllDemographicTypes()
         {
-            return await _db.DemographicTypeTbls.ToListAsync();
+            return await _db.DemographicTypeTbls.Include(x=>x.demographicTypeDTLTbls).ToListAsync();
         }
 
         public async Task<DemographicTypeTbl> GetAsync(int id)
@@ -94,7 +112,7 @@ namespace TaskBE.EntityFrameWork.Repository
             {
                 return null;
             }
-            var demographicType = await _db.DemographicTypeTbls.FirstOrDefaultAsync(x => x.DemTypeId == id);
+            var demographicType = await _db.DemographicTypeTbls.Include(x=>x.demographicTypeDTLTbls).FirstOrDefaultAsync(x => x.DemTypeId == id);
             if (demographicType == null)
             {
                 return null;

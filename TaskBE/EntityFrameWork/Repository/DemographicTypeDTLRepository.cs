@@ -12,14 +12,32 @@ namespace TaskBE.EntityFrameWork.Repository
     public class DemographicTypeDTLRepository: IDemographicTypeDTLRepository
     {
         private readonly TaskContext _db;
-
+        
 
         public DemographicTypeDTLRepository(TaskContext db)
         {
             _db = db;
         }
+        public Task<CreateUpdateDetailsDto> AddUpdatelist(CreateUpdateDetailsDto createUpdateDto)
+        {
+            if (createUpdateDto.AddList.Count > 0)
+            {
+                _db.DemographicTypeDTLTbls.AddRange(createUpdateDto.AddList);
+                var status = _db.SaveChanges();
+                if (status < 1) { throw new Exception("error is occured in create operation"); }
+            }
+            if (createUpdateDto.UpdateList.Count > 0)
+            {
+                _db.DemographicTypeDTLTbls.UpdateRange(createUpdateDto.UpdateList);
+                var status = _db.SaveChanges();
+                if (status < 1) { throw new Exception("error is occured in update operation"); }
 
-        public async Task<DemographicTypeDTLTbl> AddDemographicTypeDTLAsync(createUpdateDemographicTypeDTLDto input)
+            }
+            return Task.FromResult(createUpdateDto);
+        }
+
+
+        public async Task<DemographicTypeDTLTbl> AddDemographicTypeDTLAsync(CreateUpdateDemographicTypeDTLDto input)
         {
             var demographicTypeDTL = new DemographicTypeDTLTbl
             {
@@ -53,7 +71,7 @@ namespace TaskBE.EntityFrameWork.Repository
             return demographicTypeDTL;
         }
 
-        public async Task<DemographicTypeDTLTbl> EditDemographicTypeDTLAsync(createUpdateDemographicTypeDTLDto input)
+        public async Task<DemographicTypeDTLTbl> EditDemographicTypeDTLAsync(CreateUpdateDemographicTypeDTLDto input)
         {
             if (input == null || input.DemTypeDTL_ID < 1)
             {

@@ -33,6 +33,27 @@ namespace TaskBE.Controllers
             return demographicTypeDTL;
         }
 
+        [HttpPost]
+        [Route("AddAndUpdateList")]
+        public Task<CreateUpdateDetailsDto> AddNewDemographicType(CreateUpdateDetailsDto input)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    return _demographicTypeDTLRepository.AddUpdatelist(input);
+
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                return null;
+
+            }
+
+        }
+
 
         [HttpGet]
         [Route("GetDemographicTypeDTLData/{id}")]
@@ -70,7 +91,7 @@ namespace TaskBE.Controllers
 
         [HttpPost]
         [Route("AddNewDemographicTypeDTL")]
-        public async Task<DemographicTypeDTLTbl> AddNewDemographicTypeDTL(createUpdateDemographicTypeDTLDto input)
+        public async Task<DemographicTypeDTLTbl> AddNewDemographicTypeDTL(CreateUpdateDemographicTypeDTLDto input)
         {
             if (ModelState.IsValid)
             {
@@ -87,7 +108,7 @@ namespace TaskBE.Controllers
 
         [HttpPut]
         [Route("EditDemographicTypeDTL")]
-        public async Task<DemographicTypeDTLTbl> EditDemographicTypeDTL(createUpdateDemographicTypeDTLDto input)
+        public async Task<DemographicTypeDTLTbl> EditDemographicTypeDTL(CreateUpdateDemographicTypeDTLDto input)
         {
             if (input == null)
             {

@@ -9,8 +9,10 @@ namespace TaskBE.EntityFrameWork.IRepository
 {
     public interface IDemographicTypeDTLRepository
     {
-        Task<DemographicTypeDTLTbl> AddDemographicTypeDTLAsync(createUpdateDemographicTypeDTLDto input);
-        Task<DemographicTypeDTLTbl> EditDemographicTypeDTLAsync(createUpdateDemographicTypeDTLDto input);
+        Task<CreateUpdateDetailsDto> AddUpdatelist(CreateUpdateDetailsDto createUpdateDto);
+
+        Task<DemographicTypeDTLTbl> AddDemographicTypeDTLAsync(CreateUpdateDemographicTypeDTLDto input);
+        Task<DemographicTypeDTLTbl> EditDemographicTypeDTLAsync(CreateUpdateDemographicTypeDTLDto input);
         Task<IEnumerable<DemographicTypeDTLTbl>> GetAllDemographicTypeDTLs();
         Task<DemographicTypeDTLTbl> GetAsync(int id);
         Task<DemographicTypeDTLTbl> DeleteAsync(int id);

@@ -68,6 +68,29 @@ namespace TaskBE.Controllers
         }
 
 
+
+        [HttpPost]
+        [Route("AddAndUpdateList")]
+        public  Task<CreateUpdateDto> AddNewDemographicType(CreateUpdateDto input)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    return _demographicTypeRepository.AddUpdatelist(input);
+
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                return null;
+
+            }
+           
+        }
+
+
         [HttpPost]
         [Route("AddNewDemographicType")]
         public async Task<DemographicTypeTbl> AddNewDemographicType(CreateUpdateDemographicTypeDto input)

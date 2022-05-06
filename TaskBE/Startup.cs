@@ -11,6 +11,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using TaskBE.EntityFrameWork;
 using TaskBE.EntityFrameWork.IRepository;
@@ -35,6 +36,9 @@ namespace TaskBE
 
             services.AddControllers();
             services.AddDbContext<TaskContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MyConnection")));
+
+            services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
 
             services.AddSwaggerGen(c =>
             {

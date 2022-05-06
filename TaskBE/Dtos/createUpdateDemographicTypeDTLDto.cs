@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TaskBE.Dtos
 {
-    public class createUpdateDemographicTypeDTLDto
+    public class CreateUpdateDemographicTypeDTLDto
     {
         [Key]
         public int DemTypeDTL_ID { get; set; }

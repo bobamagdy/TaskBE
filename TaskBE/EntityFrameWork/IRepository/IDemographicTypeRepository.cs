@@ -9,6 +9,7 @@ namespace TaskBE.EntityFrameWork.IRepository
 {
     public interface IDemographicTypeRepository
     {
+        Task<CreateUpdateDto> AddUpdatelist(CreateUpdateDto createUpdateDto);
         Task<DemographicTypeTbl> AddDemographicTypeAsync(CreateUpdateDemographicTypeDto input);
         Task<DemographicTypeTbl> EditDemographicTypeAsync(CreateUpdateDemographicTypeDto model);
         Task<IEnumerable<DemographicTypeTbl>> GetAllDemographicTypes();

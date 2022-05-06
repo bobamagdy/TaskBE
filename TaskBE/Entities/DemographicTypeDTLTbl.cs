@@ -20,7 +20,7 @@ namespace TaskBE.Entities
         [Required]
         public int WeightValue { get; set; }
         [ForeignKey("DemTypeID")]
-        public DemographicTypeTbl DemographicTypeTbl { get; set; }
+        public DemographicTypeTbl DemographicTypeTbl { get          ; set; }
 
     }
 }
